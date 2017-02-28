@@ -12,11 +12,6 @@
 	-- Description:	1. This stored procedure is called from MOS Reports Manager
 	--              2. The purpose of the stored procedure is to retrieve and compute returns for futures
 	--              3. The CRM Relative Portfolios NAV is bgn of day NAV
-	--              4. Indicator to reflect exclusion of certain portfolios
-	-- Change date: 2012-11-7 - (C001) To add Absolute Returns UT seedings into the hedging base    
-	-- Change date: 2012-11-7 - (C002) Deduct Asia Balanced portfolio invested units in TAE and TACB 
-	-- Change date: 2012-11-7 - (C003) Comment off removal of LT portfolio   
-	-- Change date: 2016-09-6 - (C004) Overall rtn to change from additive to geometric methodology
 	-- Change date: 2016-09-26 - (C005) To take into account of daily changing notional values    
 	-- =======================================================================================================================================
 
@@ -34,19 +29,13 @@
 
 	
 		DECLARE @RunTypeId			int
-		DECLARE @TAA2				varchar(100)
-		DECLARE @TAGMFU				varchar(100)
-		DECLARE @TAGMFA				varchar(100)
-		DECLARE @TAGMF8				varchar(100)
+		DECLARE @portcode			varchar(100)
 		DECLARE @Portfolio			varchar(100)
 		DECLARE @RevalDate          Datetime
 
 
 		Set @RunTypeId = 1
-		Set @TAA2 = 'TAA2,TAGTAA'
-		Set @TAGMFU	 = 'TAGMFU'
-		Set @TAGMFA	 = 'TAGMFA'
-		Set @TAGMF8	 = 'TAGMF8'
+		Set @portcode = 'portcode_A,portcode_B'
 		--SET @RevalDate = @RevalDateStart
 		SET @RevalDate = '2016-10-01'
 
@@ -107,23 +96,18 @@
 
 
 		-- Identify futures portfolio
-		if @Port = 'TAA2'
+		if @Port = 'portcode_A'
 
 		begin
-			Set @Portfolio = @TAA2
+			Set @Portfolio = @portcode_A
 		end
 	
-		else if @Port = 'TAGMFU'
+		else if @Port = 'portcode_B'
 
 		begin
-			Set @Portfolio = @TAGMFU
+			Set @Portfolio = @portcode_B
 		end
 
-		else if @Port = 'TAGMF8'
-
-		begin
-			Set @Portfolio = @TAGMF8
-		end
 		;
 
 
