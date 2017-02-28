@@ -11,7 +11,6 @@
 	-- Create date: 26-Sep-16
 	-- Description:	1. This stored procedure is called from MOS Reports Manager
 	--              2. The purpose of the stored procedure is to retrieve and compute returns for futures
-	--              3. The CRM Relative Portfolios NAV is bgn of day NAV
 	-- Change date: 2016-09-26 - (C005) To take into account of daily changing notional values    
 	-- =======================================================================================================================================
 
